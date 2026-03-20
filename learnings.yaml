@@ -1,8 +1,13 @@
-learnings:
-- id: L20260320001
-  date: '2026-03-20'
-  category: openclaw
-  learning: plugins.slots.contextEngine 必须设置为 graph-memory 才能启用插件，否则只召回不摄取
-  source: ''
-  importance: medium
-  tags: []
+# MemoX - 学习记录
+# 此文件由 memox.py 自动生成或手动创建
+
+learnings: []
+
+# 示例格式：
+# - id: L20260320001
+#   date: "2026-03-20"
+#   category: "类别"
+#   learning: "学到的内容"
+#   source: "来源"
+#   importance: medium  # high | medium | low
+#   tags: ["tag1", "tag2"]

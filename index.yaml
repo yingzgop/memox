@@ -1,17 +1,16 @@
+# MemoX - 索引和统计
+# 此文件由 memox.py 自动生成
+
 metadata:
-  schema_version: '1.0'
-  last_update: '2026-03-20'
+  schema_version: "1.0"
+  last_update: ""
   total_entries:
-    decisions: 1
-    errors: 1
-    learnings: 1
+    decisions: 0
+    errors: 0
+    learnings: 0
+
 tags: {}
+
 by_topic: {}
-by_date:
-  '2026-03-20':
-    decisions:
-    - D20260320001
-    errors:
-    - E20260320001
-    learnings:
-    - L20260320001
+
+by_date: {}

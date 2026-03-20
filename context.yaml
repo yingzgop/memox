@@ -1,32 +1,17 @@
+# MemoX - 当前上下文/状态
+# 此文件由 memox.py 自动维护
+
 session:
-  date: '2026-03-20'
-  topic: 结构化记忆系统实现
-  status: implementing
-focus_areas:
-- structured-memory
-- token-optimization
-- skill-security
-active_projects:
-- name: skill-security-audit
-  status: in-progress
-  priority: medium
-- name: structured-memory
-  status: implementing
-  priority: high
-todos:
-- id: T001
-  task: 优化 skill-security-audit 检测精度
-  priority: medium
-  status: pending
-  created: '2026-03-20'
-- id: T002
-  task: 实现结构化记忆方案
-  priority: high
-  status: in-progress
-  created: '2026-03-20'
-recent_decisions:
-- D20260320001
-recent_errors:
-- E20260320001
-recent_learnings:
-- L20260320001
+  date: ""
+  topic: ""
+  status: ""
+
+focus_areas: []
+
+active_projects: []
+
+todos: []
+
+recent_decisions: []
+recent_errors: []
+recent_learnings: []

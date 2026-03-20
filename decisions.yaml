@@ -1,9 +1,17 @@
-decisions:
-- id: D20260320001
-  date: '2026-03-20'
-  topic: 记忆系统选择
-  decision: 使用结构化记忆方案，暂不安装 graph-memory
-  reasoning: graph-memory 需要额外 LLM 和 Embedding API，增加复杂度和成本。混合方案（YAML + Markdown）提供
-    90% 压缩率，零额外成本，更易维护。
-  status: implemented
-  tags: []
+# MemoX - 关键决策记录
+# 此文件由 memox.py 自动生成或手动创建
+
+decisions: []
+
+# 示例格式：
+# - id: D20260320001
+#   date: "2026-03-20"
+#   topic: "示例决策主题"
+#   decision: "做出的决定"
+#   reasoning: |
+#     决策理由和背景...
+#   alternatives:
+#     - "备选方案1"
+#     - "备选方案2"
+#   status: implemented  # implemented | pending | rejected
+#   tags: ["tag1", "tag2"]
