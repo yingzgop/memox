@@ -1,0 +1,39 @@
+# MemoX Configuration
+
+# Base path for memory storage
+base_path: "~/.openclaw/workspace/memory"
+
+# MemoX settings
+memox:
+  # Auto-update index on changes
+  auto_update_index: true
+  
+  # Archive entries older than 30 days
+  archive_after_days: 30
+  
+  # Maximum recent items to keep in context
+  max_recent_items: 5
+  
+  # ID format: PREFIX + DATE + SEQUENCE
+  id_format:
+    decision: "D"   # D20260320001
+    error: "E"      # E20260320001
+    learning: "L"   # L20260320001
+
+# Compression settings
+compression:
+  # Average compression rates
+  decision: 0.90    # 90%
+  error: 0.90      # 90%
+  learning: 0.92   # 92%
+
+# Maintenance schedule
+maintenance:
+  daily:
+    - update_index
+  weekly:
+    - check_integrity
+    - optimize_storage
+  monthly:
+    - archive_old_data
+    - clean_duplicates

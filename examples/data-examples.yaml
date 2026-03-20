@@ -1,0 +1,98 @@
+# MemoX Data Examples
+
+## Example: Decision Record
+
+```yaml
+decisions:
+  - id: D20260320001
+    date: "2026-03-20"
+    topic: "Memory System Selection"
+    decision: "Use MemoX structured memory, defer graph-memory"
+    reasoning: |
+      graph-memory requires additional LLM and Embedding APIs,
+      increasing complexity and cost.
+      Hybrid approach (YAML + Markdown) provides 90% compression,
+      zero extra cost, easier maintenance.
+    alternatives:
+      - "Install graph-memory"
+      - "Use vector database"
+      - "Use built-in compaction only"
+    status: implemented
+    tags: ["memory", "token-optimization", "architecture"]
+    source: "memory/2026-03-20.md#L45-L60"
+    key_quotes:
+      - "graph-memory requires additional LLM and Embedding APIs"
+      - "75% compression vs 90% compression"
+```
+
+## Example: Error Record
+
+```yaml
+errors:
+  - id: E20260320001
+    date: "2026-03-20"
+    error: "skill-security-audit high false positive rate"
+    symptom: |
+      Detected 36 potential issues, 32 were false positives.
+      Documentation text matched regex patterns incorrectly.
+    solution: |
+      Optimize regex patterns, add whitelist mechanism,
+      distinguish real code from documentation examples.
+    workaround: false
+    status: pending
+    tags: ["skill", "security", "audit"]
+    source: "memory/2026-03-20.md#L120-L135"
+```
+
+## Example: Learning Record
+
+```yaml
+learnings:
+  - id: L20260320001
+    date: "2026-03-20"
+    category: "openclaw"
+    learning: |
+      plugins.slots.contextEngine must be set to "graph-memory" 
+      to enable the plugin. Otherwise only recalls data but 
+      doesn't ingest new messages.
+    source: "graph-memory official documentation"
+    importance: high
+    tags: ["openclaw", "plugin", "configuration"]
+    related_decisions:
+      - "D20260320001"
+```
+
+## Example: Context File
+
+```yaml
+session:
+  date: "2026-03-20"
+  topic: "MemoX System Implementation"
+  status: completed
+
+focus_areas:
+  - "structured-memory"
+  - "token-optimization"
+  - "skill-security"
+
+active_projects:
+  - name: "MemoX"
+    status: completed
+    priority: high
+
+todos:
+  - id: "T001"
+    task: "Implement MemoX structured memory"
+    priority: high
+    status: completed
+    created: "2026-03-20"
+
+recent_decisions:
+  - D20260320001
+
+recent_errors:
+  - E20260320001
+
+recent_learnings:
+  - L20260320001
+```
