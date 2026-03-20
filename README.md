@@ -1,93 +1,17 @@
-<<<<<<< HEAD
-# MemoX - 结构化记忆系统
-
-**MemoX** = **Memo**ry E**x**ploration（记忆探索）
-
-混合架构的记忆管理系统，结合 YAML 结构化数据（快速检索）和 Markdown 完整记录（保留上下文）。
-
-## 目录结构
-
-```
-memory/
-├── MemoX/                    # 结构化记忆（YAML）
-│   ├── decisions.yaml        # 关键决策记录
-│   ├── errors.yaml           # 错误和解决方案
-│   ├── learnings.yaml        # 学习记录
-│   ├── context.yaml          # 当前上下文/状态
-│   └── index.yaml            # 统计索引
-├── snippets/                 # 关键对话片段
-│   └── YYYY-MM-DD/
-└── YYYY-MM-DD.md            # 完整对话记录（Markdown）
-```
-
-## 压缩效果
-
-| 内容类型 | 原始对话 | MemoX | 压缩率 |
-|---------|---------|-------|--------|
-| 简单决策 | 500 tokens | 50 tokens | 90% |
-| 错误解决 | 1000 tokens | 100 tokens | 90% |
-| 复杂学习 | 2000 tokens | 150 tokens | 92% |
-
-平均压缩率：**~90%**
-
-## 使用方式
-
-### 添加决策
-```bash
-python scripts/update_structured_memory.py add-decision \
-  "2026-03-20" \
-  "话题" \
-  "决策内容" \
-  "决策理由"
-```
-
-### 添加错误
-```bash
-python scripts/update_structured_memory.py add-error \
-  "2026-03-20" \
-  "错误描述" \
-  "症状" \
-  "解决方案"
-```
-
-### 添加学习
-```bash
-python scripts/update_structured_memory.py add-learning \
-  "2026-03-20" \
-  "类别" \
-  "学习内容"
-```
-
-### 更新索引
-```bash
-python scripts/update_structured_memory.py update-index
-```
-
-## 维护计划
-
-- **每日**: 自动更新索引
-- **每周**: 完整检查和优化
-- **每月**: 归档旧数据
-
-## 数据格式
-
-所有 YAML 文件遵循统一格式，包含：
-- `id`: 唯一标识（如 D20260320001）
-- `date`: 日期
-- `tags`: 标签列表
-- `source`: 指向原始 Markdown 的链接
-
----
-*Created: 2026-03-20*
-*Version: 1.0*
-=======
 # MemoX
 
 **MemoX** = **Memo**ry E**x**ploration
 
 A hybrid structured memory system for AI agents, combining YAML (fast retrieval) with Markdown (full context) for ~90% token compression.
 
-## Features
+[English](#english) | [中文](#中文)
+
+---
+
+<a name="english"></a>
+## English
+
+### Features
 
 - 🎯 **90% Token Compression**: Drastically reduce context window usage
 - 🔍 **Fast Query**: YAML structure enables instant filtering
@@ -95,12 +19,14 @@ A hybrid structured memory system for AI agents, combining YAML (fast retrieval)
 - 🗂️ **3 Entity Types**: Decisions, Errors, Learnings
 - 🏷️ **Tag System**: Flexible categorization and search
 - 🔗 **Pointer Pattern**: Link structured data to full text
+- ⚙️ **Configurable**: YAML-based configuration
 - 💰 **Zero Cost**: No external APIs or services required
 - 📊 **Git-Friendly**: Text-based, version-controllable
+- 🔄 **Heartbeat Integration**: Auto-inject to agent context
 
-## Quick Start
+### Quick Start
 
-### Installation
+#### Installation
 
 ```bash
 # Clone the repository
@@ -113,11 +39,30 @@ cp -r memox ~/.openclaw/workspace/memory/
 pip install pyyaml
 ```
 
-### Basic Usage
+#### Configuration
+
+Edit `memox.yaml`:
+
+```yaml
+base_path: "~/.openclaw/workspace/memory"
+
+memox:
+  auto_update_index: true
+  archive_after_days: 30
+  max_recent_items: 5
+
+maintenance:
+  daily: [update_index]
+  weekly: [check_integrity, optimize_storage]
+  monthly: [archive_old_data]
+```
+
+#### Basic Usage
 
 ```bash
-# Add a decision
 cd ~/.openclaw/workspace/memory
+
+# Add a decision
 python MemoX/src/memox.py add-decision \
   "2026-03-20" \
   "Architecture Choice" \
@@ -139,17 +84,26 @@ python MemoX/src/memox.py add-learning \
 
 # Update index
 python MemoX/src/memox.py update-index
+
+# Query structured memory
+python MemoX/src/memox_query.py recent
+python MemoX/src/memox_query.py search "memory"
+
+# Inject to agent context (heartbeat)
+python MemoX/src/memox_inject.py
 ```
 
-## Directory Structure
+### Directory Structure
 
 ```
 memory/
 ├── MemoX/                    # Structured memory
 │   ├── src/
-│   │   └── memox.py         # Core script
+│   │   ├── memox.py         # Core update script
+│   │   ├── memox_query.py   # Query tool
+│   │   └── memox_inject.py  # Context injection
 │   ├── docs/
-│   │   └── ARCHITECTURE.md  # Design documentation
+│   │   └── ARCHITECTURE.md
 │   ├── examples/
 │   │   └── data-examples.yaml
 │   ├── memox.yaml           # Configuration
@@ -157,77 +111,28 @@ memory/
 │   ├── errors.yaml          # Error records
 │   ├── learnings.yaml       # Learning records
 │   ├── context.yaml         # Current context
-│   ├── index.yaml           # Statistics
-│   └── README.md            # This file
+│   └── index.yaml           # Statistics
 ├── snippets/                # Key conversation snippets
 └── YYYY-MM-DD.md           # Full conversations
 ```
 
-## Data Format
+### Tools
 
-### Decision Record
+| Script | Purpose |
+|--------|---------|
+| `memox.py` | Add/update structured memory entries |
+| `memox_query.py` | Query and search memory |
+| `memox_inject.py` | Inject memory to agent context |
 
-```yaml
-decisions:
-  - id: D20260320001
-    date: "2026-03-20"
-    topic: "Memory System Selection"
-    decision: "Use MemoX structured memory"
-    reasoning: |
-      Provides 90% compression with zero cost.
-      graph-memory requires additional APIs.
-    alternatives:
-      - "graph-memory"
-      - "Vector database"
-    status: implemented
-    tags: ["memory", "architecture"]
-    source: "memory/2026-03-20.md#L45-L60"
-```
+### Data Format
 
-### Error Record
+See [examples/data-examples.yaml](examples/data-examples.yaml)
 
-```yaml
-errors:
-  - id: E20260320001
-    date: "2026-03-20"
-    error: "High false positive rate"
-    symptom: "36 issues detected, 32 false positives"
-    solution: "Optimize regex patterns"
-    status: pending
-    tags: ["security", "audit"]
-```
+### Architecture
 
-### Learning Record
+See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
 
-```yaml
-learnings:
-  - id: L20260320001
-    date: "2026-03-20"
-    category: "configuration"
-    learning: "contextEngine must be set for plugins"
-    importance: high
-    tags: ["openclaw", "plugin"]
-```
-
-## Configuration
-
-Edit `memox.yaml`:
-
-```yaml
-base_path: "~/.openclaw/workspace/memory"
-
-memox:
-  auto_update_index: true
-  archive_after_days: 30
-  max_recent_items: 5
-
-maintenance:
-  daily: [update_index]
-  weekly: [check_integrity, optimize_storage]
-  monthly: [archive_old_data]
-```
-
-## Compression Comparison
+### Comparison
 
 | System | Compression | Cost | Complexity |
 |--------|-------------|------|------------|
@@ -236,26 +141,97 @@ maintenance:
 | Vector DB | ~80% | Service $ | High |
 | **MemoX** | **~90%** | **Free** | **Medium** |
 
-## How It Works
+---
 
-1. **Extract**: During/after conversation, extract key info (decisions, errors, learnings)
-2. **Store**: Save structured data to YAML, full context to Markdown
-3. **Index**: Maintain statistics and tag cloud
-4. **Query**: Use YAML for fast search, follow pointers for full details
+<a name="中文"></a>
+## 中文
 
-## Maintenance
+### 特性
 
-- **Daily**: Auto-update index
-- **Weekly**: Check integrity, optimize storage
-- **Monthly**: Archive old entries (>30 days)
+- 🎯 **90% Token 压缩率**：大幅降低上下文窗口占用
+- 🔍 **快速查询**：YAML 结构支持即时过滤
+- 📝 **完整上下文**：Markdown 保留完整对话细节
+- 🗂️ **3 种实体类型**：决策、错误、学习
+- 🏷️ **标签系统**：灵活分类和搜索
+- 🔗 **指针模式**：结构化数据链接到完整文本
+- ⚙️ **可配置**：基于 YAML 的配置
+- 💰 **零成本**：无需外部 API 或服务
+- 📊 **Git 友好**：纯文本，可版本控制
+- 🔄 **心跳集成**：自动注入到代理上下文
 
-## Contributing
+### 快速开始
 
-Contributions welcome! Areas for improvement:
-- Additional entity types
-- Query interface (CLI/GUI)
-- Integration with other agents
-- Import/export tools
+#### 安装
+
+```bash
+# 克隆仓库
+git clone https://github.com/yingzgop/memox.git
+
+# 复制到记忆目录
+cp -r memox ~/.openclaw/workspace/memory/
+
+# 安装 Python 依赖
+pip install pyyaml
+```
+
+#### 配置
+
+编辑 `memox.yaml`：
+
+```yaml
+base_path: "~/.openclaw/workspace/memory"
+
+memox:
+  auto_update_index: true
+  archive_after_days: 30
+  max_recent_items: 5
+```
+
+#### 基本用法
+
+```bash
+cd ~/.openclaw/workspace/memory
+
+# 添加决策
+python MemoX/src/memox.py add-decision \
+  "2026-03-20" \
+  "架构选择" \
+  "使用 MemoX 管理记忆" \
+  "零 API 成本，90% 压缩率"
+
+# 添加错误记录
+python MemoX/src/memox.py add-error \
+  "2026-03-20" \
+  "误报率高" \
+  "检测到 36 个问题，32 个误报" \
+  "优化正则表达式"
+
+# 添加学习
+python MemoX/src/memox.py add-learning \
+  "2026-03-20" \
+  "配置" \
+  "必须设置 contextEngine 才能启用插件"
+
+# 更新索引
+python MemoX/src/memox.py update-index
+
+# 查询记忆
+python MemoX/src/memox_query.py recent
+python MemoX/src/memox_query.py search "memory"
+
+# 注入到代理上下文（心跳）
+python MemoX/src/memox_inject.py
+```
+
+### 工具脚本
+
+| 脚本 | 用途 |
+|------|------|
+| `memox.py` | 添加/更新结构化记忆条目 |
+| `memox_query.py` | 查询和搜索记忆 |
+| `memox_inject.py` | 注入记忆到代理上下文 |
+
+---
 
 ## License
 
@@ -267,5 +243,5 @@ Created for OpenClaw agent system.
 
 ---
 
-*"Structure your memory, explore your knowledge."*
->>>>>>> 6bd63a1 (Initial MemoX release - Structured Memory System for OpenClaw)
+*"Structure your memory, explore your knowledge."*  
+*"结构化你的记忆，探索你的知识。"*
