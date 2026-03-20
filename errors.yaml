@@ -1,0 +1,9 @@
+errors:
+- id: E20260320001
+  date: '2026-03-20'
+  error: skill-security-audit 误报率高
+  symptom: 检测到 36 个潜在问题，其中 32 个是误报（文档文字被正则匹配）
+  solution: 优化正则表达式，添加白名单机制，区分真实代码和文档示例
+  status: open
+  workaround: false
+  tags: []

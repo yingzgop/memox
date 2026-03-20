@@ -1,0 +1,8 @@
+learnings:
+- id: L20260320001
+  date: '2026-03-20'
+  category: openclaw
+  learning: plugins.slots.contextEngine 必须设置为 graph-memory 才能启用插件，否则只召回不摄取
+  source: ''
+  importance: medium
+  tags: []

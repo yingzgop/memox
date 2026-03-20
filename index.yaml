@@ -1,0 +1,17 @@
+metadata:
+  schema_version: '1.0'
+  last_update: '2026-03-20'
+  total_entries:
+    decisions: 1
+    errors: 1
+    learnings: 1
+tags: {}
+by_topic: {}
+by_date:
+  '2026-03-20':
+    decisions:
+    - D20260320001
+    errors:
+    - E20260320001
+    learnings:
+    - L20260320001
