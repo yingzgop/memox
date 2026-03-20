@@ -1,4 +1,5 @@
 # MemoX Configuration
+# 本机配置文件
 
 # Base path for memory storage
 base_path: "~/.openclaw/workspace/memory"
@@ -16,16 +17,15 @@ memox:
   
   # ID format: PREFIX + DATE + SEQUENCE
   id_format:
-    decision: "D"   # D20260320001
-    error: "E"      # E20260320001
-    learning: "L"   # L20260320001
+    decision: "D"
+    error: "E"
+    learning: "L"
 
-# Compression settings
+# Compression settings (informational)
 compression:
-  # Average compression rates
-  decision: 0.90    # 90%
-  error: 0.90      # 90%
-  learning: 0.92   # 92%
+  decision: 0.90
+  error: 0.90
+  learning: 0.92
 
 # Maintenance schedule
 maintenance:

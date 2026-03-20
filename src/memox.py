@@ -10,9 +10,37 @@ from datetime import datetime
 from pathlib import Path
 
 class MemoXUpdater:
-    def __init__(self, base_path: Path):
-        self.base_path = base_path
-        self.memox_path = base_path / "MemoX"
+    def __init__(self, base_path: Path = None):
+        # Load configuration
+        self.config = self._load_config()
+        
+        # Use configured path or default
+        if base_path is None:
+            base_path_str = self.config.get("base_path", "~/.openclaw/workspace/memory")
+            self.base_path = Path(base_path_str).expanduser()
+        else:
+            self.base_path = base_path
+            
+        self.memox_path = self.base_path / "MemoX"
+        
+    def _load_config(self) -> dict:
+        """Load configuration from memox.yaml"""
+        # Try multiple config locations
+        config_paths = [
+            Path(__file__).parent.parent / "memox.yaml",  # Project directory
+            Path.home() / ".openclaw/workspace/memory/MemoX/memox.yaml",  # User directory
+            Path("memox.yaml"),  # Current directory
+        ]
+        
+        for config_path in config_paths:
+            if config_path.exists():
+                try:
+                    with open(config_path, 'r', encoding='utf-8') as f:
+                        return yaml.safe_load(f) or {}
+                except Exception as e:
+                    print(f"Warning: Could not load config from {config_path}: {e}")
+                    
+        return {}  # Return empty config if none found
         
     def load_yaml(self, filename: str) -> dict:
         """Load a YAML file or return empty structure"""
@@ -195,15 +223,28 @@ def main():
     """Main entry point"""
     import sys
     
-    # Determine base path
-    home = Path.home()
-    base_path = home / ".openclaw/workspace/memory"
+    # Initialize updater (will auto-load config)
+    updater = MemoXUpdater()
     
-    updater = MemoXUpdater(base_path)
+    # Print config info
+    config_path = updater.config.get("_config_path", "default settings")
     
     if len(sys.argv) < 2:
-        print("Usage: python update_structured_memory.py <command> [args...]")
+        print("MemoX - Structured Memory System")
+        print(f"Base path: {updater.base_path}")
+        print(f"Config: {config_path}")
         print("")
+        print("Usage: python memox.py <command> [args...]")
+        print("")
+        print("Commands:")
+        print("  update-index              Update index.yaml statistics")
+        print("  add-decision <date> <topic> <decision> <reasoning>")
+        print("  add-error <date> <error> <symptom> <solution>")
+        print("  add-learning <date> <category> <learning>")
+        print("")
+        print("Examples:")
+        print('  python memox.py add-decision 2026-03-20 "Topic" "Decision" "Reason"')
+        sys.exit(1)
         print("Commands:")
         print("  update-index              Update index.yaml statistics")
         print("  add-decision <date> <topic> <decision> <reasoning>")
