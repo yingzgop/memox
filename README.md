@@ -57,41 +57,26 @@ maintenance:
   monthly: [archive_old_data]
 ```
 
-#### Basic Usage
+#### OpenClaw Skill (Natural Language)
+
+For OpenClaw users, MemoX includes a skill for natural language recording:
 
 ```bash
-cd ~/.openclaw/workspace/memory
-
-# Add a decision
-python MemoX/src/memox.py add-decision \
-  "2026-03-20" \
-  "Architecture Choice" \
-  "Use MemoX for memory management" \
-  "Provides 90% compression with zero API cost"
-
-# Add an error record
-python MemoX/src/memox.py add-error \
-  "2026-03-20" \
-  "High false positive rate" \
-  "36 issues detected, 32 false positives" \
-  "Optimize regex patterns"
-
-# Add a learning
-python MemoX/src/memox.py add-learning \
-  "2026-03-20" \
-  "configuration" \
-  "contextEngine must be set for plugins to work"
-
-# Update index
-python MemoX/src/memox.py update-index
-
-# Query structured memory
-python MemoX/src/memox_query.py recent
-python MemoX/src/memox_query.py search "memory"
-
-# Inject to agent context (heartbeat)
-python MemoX/src/memox_inject.py
+# Copy skill to OpenClaw
+cp -r ~/.agents/skills/memox ~/.agents/skills/
 ```
+
+Then simply say:
+- "**Remember this** - we're using Docker"
+- "**I learned** that Python dicts are ordered"
+- "**Don't forget** to update the config"
+- "**The problem was** X, **fixed by** Y"
+
+The skill automatically detects trigger phrases and records to YAML.
+
+### Manual Recording (CLI)
+
+If not using OpenClaw skill, use the CLI directly:
 
 ### Directory Structure
 
@@ -123,6 +108,45 @@ memory/
 | `memox.py` | Add/update structured memory entries |
 | `memox_query.py` | Query and search memory |
 | `memox_inject.py` | Inject memory to agent context |
+| `record.py` | Quick entry point (used by skill) |
+
+### CLI Usage (Without Skill)
+
+If not using the OpenClaw skill, use the CLI directly:
+
+```bash
+cd ~/.openclaw/workspace/memory
+
+# Add a decision
+python MemoX/src/memox.py add-decision \
+  "2026-03-20" \
+  "Topic" \
+  "Decision made" \
+  "Reasoning"
+
+# Add an error
+python MemoX/src/memox.py add-error \
+  "2026-03-20" \
+  "Error description" \
+  "Symptoms" \
+  "Solution"
+
+# Add a learning
+python MemoX/src/memox.py add-learning \
+  "2026-03-20" \
+  "Category" \
+  "What was learned"
+
+# Update index
+python MemoX/src/memox.py update-index
+
+# Query
+python MemoX/src/memox_query.py recent
+python MemoX/src/memox_query.py search "docker"
+
+# Inject to context
+python MemoX/src/memox_inject.py
+```
 
 ### Data Format
 
@@ -230,6 +254,45 @@ python MemoX/src/memox_inject.py
 | `memox.py` | 添加/更新结构化记忆条目 |
 | `memox_query.py` | 查询和搜索记忆 |
 | `memox_inject.py` | 注入记忆到代理上下文 |
+| `record.py` | 快速入口（Skill 使用）|
+
+### CLI 用法（不使用 Skill）
+
+如果不使用 OpenClaw Skill，直接使用 CLI：
+
+```bash
+cd ~/.openclaw/workspace/memory
+
+# 添加决策
+python MemoX/src/memox.py add-decision \
+  "2026-03-20" \
+  "主题" \
+  "做出的决定" \
+  "理由"
+
+# 添加错误
+python MemoX/src/memox.py add-error \
+  "2026-03-20" \
+  "错误描述" \
+  "症状" \
+  "解决方案"
+
+# 添加学习
+python MemoX/src/memox.py add-learning \
+  "2026-03-20" \
+  "类别" \
+  "学到的内容"
+
+# 更新索引
+python MemoX/src/memox.py update-index
+
+# 查询
+python MemoX/src/memox_query.py recent
+python MemoX/src/memox_query.py search "docker"
+
+# 注入到上下文
+python MemoX/src/memox_inject.py
+```
 
 ---
 
